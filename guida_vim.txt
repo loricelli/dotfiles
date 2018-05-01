@@ -1,0 +1,32 @@
+COMMAND LIST VIM UTILI
+i             -> cursore nella posizione precedente a quella attuale in modalità scrittura
+a             -> cursore nella posizione successiva a quella attuale in modalità scrittura
+o             -> crea nuova riga e entra in modalità scrittura
+x             -> cancella carattere su cui è il cursore
+$             -> posiziona il cursore alla fine della linea
+0             -> posiziona il cursore all'inizio della linea
+r             -> rimpiazza la lettera su cui è posizionato il cursore con la lettera successiva
+u             -> undo ultima operazione
+ctrl+r        -> redo ultimo undo
+:vsp nomefile -> split verticale e apertura nomefile
+:sp nomefile  -> split orizontale e apertura nomefile
+ctrl+w        -> si sposta tra i tab aperti con split
+/             -> apre ricerca all'interno del file
+n			  -> una volta che è in ricerca si sposta al risultato successivo
+N			  -> una volta che è in ricerca si sposta al risultato precedente
+:noh		  -> rimuove highlight delle parole trovate
+G             -> si posiziona a fine file
+gg            -> si posiziona a inizio file
+nG            -> si posiziona alla n-esima riga del file
+w             -> si sposta all'inizio della parola successiva
+nw            -> si posta all'inizio della n-esima parola successiva
+e             -> si sposta alla fine della parola successiva
+ne            -> si sposta alla fine della n-esima parola successiva
+dd            -> cancella una riga intera
+dw            -> cancella da dove è il cursore fino a fine parola
+ndw           -> cancella n parole 
+v             -> modalità visuale e puoi selezionare parole
+y             -> copia quello che è selezionato
+p             -> incolla quello che è copiato
+ctrl+n		  -> mentre scrivi qualcosa apre l'autocomplete
+ctrl+w +ctrl+r -> swap delle pagine vsplit

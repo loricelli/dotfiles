@@ -17,6 +17,13 @@ nnoremap <leader><right> :tabn<CR>
 nnoremap <leader><left> :tabp<CR>
 "when working with html with F5 the html is opened on browser
 nnoremap <F5> :!xdg-open %<CR><CR>
+map <C-f> :NERDTreeToggle<CR>
+set mouse=a "adds mouse click
+set noshowmode
+set ttimeoutlen=50
+map <S-d> di
+map <S-y> "+y
+map <S-p> "+p
 "=======START VIM-PLUG SECTION=======
 call plug#begin('~/.vim/plugged')
 Plug 'KeitaNakamura/neodark.vim'
@@ -28,10 +35,6 @@ call plug#end()
 "=======END VIM-PLUG SECTION=======
 let g:neodark#terminal_transparent = 1 " default: 0
 colorscheme neodark
-map <C-f> :NERDTreeToggle<CR>
-set mouse=a "adds mouse click
-set noshowmode
-set ttimeoutlen=50
 let g:lightline = {
       \ 'colorscheme': 'jellybeans',
       \ 'active': {
@@ -42,3 +45,4 @@ let g:lightline = {
       \   'gitbranch': 'gitbranch#name'
       \ },
       \ }
+"==========END SET COLOR SCHEME AND GIT PLUGIN=========

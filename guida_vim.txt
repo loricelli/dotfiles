@@ -30,3 +30,6 @@ y             -> copia quello che è selezionato
 p             -> incolla quello che è copiato
 ctrl+n		  -> mentre scrivi qualcosa apre l'autocomplete
 ctrl+w +ctrl+r -> swap delle pagine vsplit
+start: <C-n> start multicursor and add a virtual cursor + selection on the match
+ next: <C-n> add a new virtual cursor + selection on the next match
+ skip: <C-x> skip the next match

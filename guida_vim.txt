@@ -33,3 +33,8 @@ ctrl+w +ctrl+r -> swap delle pagine vsplit
 start: <C-n> start multicursor and add a virtual cursor + selection on the match
  next: <C-n> add a new virtual cursor + selection on the next match
  skip: <C-x> skip the next match
+ delete from current line to line n -> dnG
+
+za folds/unfolds current function
+zM folds all functions
+zR unfolds all functions

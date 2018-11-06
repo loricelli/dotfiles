@@ -1,6 +1,6 @@
 syntax enable "this enables sintax processing
 set termguicolors "enables colors
-
+set softtabstop=4
 filetype plugin indent on
 " show existing tab with 4 spaces width
 set tabstop=4
@@ -29,10 +29,12 @@ set noshowmode
 set ttimeoutlen=100
 map <S-d> di
 autocmd VimResized * wincmd =
+map <C-t> :tabnew 
+ca tp tabp
+ca ts tabn
 
 "o on line with comment won't generate a commented line
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-
 "=======START VIM-PLUG SECTION=======
 call plug#begin('~/.vim/plugged')
 
@@ -46,10 +48,21 @@ Plug 'itchyny/vim-gitbranch'
 Plug 'scrooloose/nerdtree'
 Plug 'itchyny/lightline.vim'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'jiangmiao/auto-pairs'
+"Plug 'jiangmiao/auto-pairs'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'w0rp/ale'
+Plug 'maximbaz/lightline-ale'
+Plug 'amcsi/auto-pairs'
 call plug#end()
-"=======END VIM-PLUG SECTION========
+
+"=======ALE SETTINGS SECTION=====
+
+"Ale settings
+let g:ale_set_highlights = 0
+let g:ale_lint_on_text_changed = 'normal'
+"let g:ale_sign_column_always = 1
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 "=======APPEARENCE SECTIONS=========
 
@@ -60,14 +73,26 @@ call plug#end()
 "One half dark theme setup
 colorscheme material "onehalfdark
 highlight Comment cterm=italic
+
+"=======LIGHTLINE SETTINGS==========
 let g:lightline = {
       \ 'colorscheme': 'material',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch','readonly', 'filename', 'modified'] ]
+      \             [ 'gitbranch','readonly', 'filename', 'modified']]
       \ },
       \ 'component_function': {
       \   'gitbranch': 'gitbranch#name'
       \ },
       \ }
-"======END APPEARENCE SECTION=======
+"ALE in lightline settings
+let g:lightline.component_expand = {
+      \  'linter_warnings': 'lightline#ale#warnings',
+      \  'linter_errors': 'lightline#ale#errors'
+      \ }
+let g:lightline.component_type = {
+      \     'linter_warnings': 'warning',
+      \     'linter_errors': 'error'
+      \ }
+
+let g:lightline.active = { 'right': [['lineinfo'],['percent'],[ 'linter_errors', 'linter_warnings']] }

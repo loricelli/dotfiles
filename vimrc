@@ -30,31 +30,49 @@ set ttimeoutlen=100
 
 "==========LEADER=========================
 "leader key is ,
- :let mapleader = "-"          
+:let mapleader = "-"          
 nnoremap <leader><space> :nohlsearch<CR>
-nnoremap <leader>s O<Esc>j
-nnoremap <leader>i =i{
+nnoremap <leader>su O<Esc>j
+nnoremap <leader>tb =i{
 nnoremap <leader>ta gg=G
+
 "==========MAP=====================
 map <S-d> di
 map <C-f> :NERDTreeToggle<CR>
 map <C-t> :tabnew 
+
 "sw stands for surround word and sl stands for surround line. Short commands for surround plugin.
 "Type what you want after to sorround word/line
 map sw ysiw
 map sl yss
+
 "copy/paste to system clipboard
 map <C-c> "+y
 map <C-v> "+p
+
 "remap save on ctrl+s
 :nmap <C-s> :w<CR>
 :imap <C-s> <Esc>:w<CR>a
+:nmap <C-q> :q<CR>
+:imap <C-q> <Esc>:q<CR>
+
 "trying to learn those fucking hjkl
 noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
 
+"Disable ex mode 
+nnoremap Q <Nop>
+
+"allow esc on terminal window
+tnoremap <Esc> <C-\><C-n>
+
+"move easily between splits
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
 "=======START VIM-PLUG SECTION=======
 call plug#begin('~/.vim/plugged')
@@ -71,6 +89,8 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'amcsi/auto-pairs'
 Plug 'tpope/vim-surround'
+Plug 'scrooloose/nerdcommenter'
+Plug 'dhruvasagar/vim-zoom'
 call plug#end()
 
 "=======APPEARENCE SECTIONS=========

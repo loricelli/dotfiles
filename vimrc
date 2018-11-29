@@ -28,22 +28,32 @@ set mouse=a "adds mouse click
 set noshowmode
 set ttimeoutlen=100
 set encoding=UTF-8
-set tags=tags
 "==========LEADER=========================
 "leader key is ,
 nnoremap <leader><space> :nohlsearch<CR>
+
+"adds space above
 nnoremap <leader>su O<Esc>j
+
+"indent all block
 nnoremap <leader>ib =i{
-nnoremap <leader>ia gg=G
+
+"intend all file
+nnoremap <leader>ia gg=G 
 "open 10 line terminal below
 :nnoremap <leader>o :below 10sp term://$SHELL<cr>i
 
 "==========MAP=====================
+"this on a ' or ( etc. deletes the inner text until the matching ' ) etc.
 map <S-d> di
+
+"opens nerdtree
 map <C-f> :NERDTreeToggle<CR>
-":NERDTreeFind<CR>
+
+"removes ? help on nerdtree
 let NERDTreeMinimalUI = 1
-"let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+
+"opens tagbar
 map <C-t> :TagbarToggle<CR>
 
 "sw stands for surround word and sl stands for surround line. Short commands for surround plugin.
@@ -57,7 +67,7 @@ map <C-v> "+p
 
 "remap save on ctrl+s
 :nmap <C-s> :w<CR>
-:imap <C-s> <Esc>:w<CR>a
+:imap <C-s> <Esc>:w<CR>
 :nmap <C-q> :q<CR>
 :imap <C-q> <Esc>:q<CR>
 
@@ -80,11 +90,13 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+"Paste on line below the cursor
+map ,p :pu
+
 "=======START VIM-PLUG SECTION=======
 call plug#begin('~/.vim/plugged')
 "======THEMES========================
 "Plug 'KeitaNakamura/neodark.vim'
-"Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'kaicataldo/material.vim'
 "======OTHER PLUGINS=================
 Plug 'airblade/vim-gitgutter'
@@ -98,30 +110,30 @@ Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdcommenter'
 Plug 'dhruvasagar/vim-zoom'
 Plug 'ryanoasis/vim-devicons'
-Plug 'tpope/vim-fugitive'
 Plug 'majutsushi/tagbar'
+Plug 'ervandew/supertab'
 call plug#end()
 
 "=======APPEARENCE SECTIONS=========
 
-"neodark theme setup
-"let g:neodark#terminal_transparent = 1 " default: 0
-"colorscheme neodark
-
-"One half dark theme setup
-colorscheme material "onehalfdark
+colorscheme material
 highlight Comment cterm=italic
+
+"=======PLUGIN SETTINGS=============
+
 let g:tagbar_autofocus = 1
 let g:tagbar_compact = 1
 let g:tagbar_show_linenumbers = -1
+
 "=======LIGHTLINE SETTINGS==========
 let g:lightline = {
             \ 'colorscheme': 'material_vim',
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ],
             \             [ 'gitbranch','readonly', 'filename', 'modified']],
-            \   'right': [[ 'lineinfo'] ,
-            \            ['filetype','currenttime']]
+            \   'right': [ [ 'lineinfo'] ,
+            \            [ 'filetype','currenttime']
+            \            ]
             \ },
             \ 'component_function': {
             \   'gitbranch': 'LightlineFugitive',
@@ -154,9 +166,10 @@ let g:lightline.separator = {
             \   'left': '', 'right': ''
             \}
 function! LightlineFugitive()
-    if exists('*fugitive#head')
-        let branch = fugitive#head()
+    if exists('*gitbranch#name')
+        let branch = gitbranch#name()
         return branch !=# '' ? ' '.branch : ''
     endif
     return ''
 endfunction
+

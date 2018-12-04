@@ -28,7 +28,11 @@ set mouse=a "adds mouse click
 set noshowmode
 set ttimeoutlen=100
 set encoding=UTF-8
+set cursorline 
 "==========LEADER=========================
+
+:let mapleader = "-"
+
 "leader key is ,
 nnoremap <leader><space> :nohlsearch<CR>
 
@@ -91,7 +95,22 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 "Paste on line below the cursor
-map ,p :pu
+map ,p :pu<CR>
+
+
+"=======CUSTOM COMMANDS=======
+"replaces all the occurences of src with dest (only exact match)
+function! FindAndReplaceExact(src,dest)
+    execute ':%s/\<' . a:src . '\>/' . a:dest . '/gc'
+endfunction
+
+command -nargs=* Fase call FindAndReplaceExact(<f-args>)
+
+function! FindAndReplace(src,dest)
+    execute ':%s/' . a:src . '/' . a:dest . '/gc'
+endfunction
+
+command -nargs=* Fas call FindAndReplace(<f-args>)
 
 "=======START VIM-PLUG SECTION=======
 call plug#begin('~/.vim/plugged')
@@ -130,7 +149,7 @@ let g:lightline = {
             \ 'colorscheme': 'material_vim',
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ],
-            \             [ 'gitbranch','readonly', 'filename', 'modified']],
+            \             [ 'gitbranch','readonly', 'absolutepath', 'modified']],
             \   'right': [ [ 'lineinfo'] ,
             \            [ 'filetype','currenttime']
             \            ]

@@ -38,3 +38,13 @@ start: <C-n> start multicursor and add a virtual cursor + selection on the match
 za folds/unfolds current function
 zM folds all functions
 zR unfolds all functions
+zz puts the current line on the center of the screen
+zt " " " " on the top of the screen
+zb " " " " on the last line of the screen
+
+ctrl+d moves forward half screen at a time
+ctrl+b moves backwards half screen at a time
+
+di) (or }," etc) deletes all in between parents
+ci) (or }," etc) deletes all in between parents and switch to insert mode
+

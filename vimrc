@@ -48,17 +48,13 @@ nnoremap <leader>ia gg=G
 :nnoremap <leader>o :below 10sp term://$SHELL<cr>i
 
 "==========MAP=====================
-"this on a ' or ( etc. deletes the inner text until the matching ' ) etc.
-map <S-d> di
 
+map SD :cd %:p:h<CR>
 "opens nerdtree
 map <C-f> :NERDTreeToggle<CR>
 
 "removes ? help on nerdtree
 let NERDTreeMinimalUI = 1
-
-"opens tagbar
-map <C-t> :TagbarToggle<CR>
 
 "sw stands for surround word and sl stands for surround line. Short commands for surround plugin.
 "Type what you want after to sorround word/line
@@ -97,6 +93,8 @@ nnoremap <C-H> <C-W><C-H>
 "Paste on line below the cursor
 map ,p :pu<CR>
 
+nnoremap <C-p> :Files<CR>
+nnoremap <C-a> :Ag!<CR>
 
 "=======CUSTOM COMMANDS=======
 "replaces all the occurences of src with dest (only exact match)
@@ -123,14 +121,14 @@ Plug 'itchyny/vim-gitbranch'
 Plug 'scrooloose/nerdtree'
 Plug 'itchyny/lightline.vim'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'amcsi/auto-pairs'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdcommenter'
 Plug 'dhruvasagar/vim-zoom'
 Plug 'ryanoasis/vim-devicons'
-Plug 'majutsushi/tagbar'
 Plug 'ervandew/supertab'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+Plug 'junegunn/fzf.vim'
 call plug#end()
 
 "=======APPEARENCE SECTIONS=========
@@ -140,10 +138,17 @@ highlight Comment cterm=italic
 
 "=======PLUGIN SETTINGS=============
 
-let g:tagbar_autofocus = 1
-let g:tagbar_compact = 1
-let g:tagbar_show_linenumbers = -1
+let g:fzf_layout = { 'down': '~25%' }
+autocmd! FileType fzf
+autocmd  FileType fzf set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
+if has('nvim')
+  aug fzf_setup
+    au!
+    au TermOpen term://*FZF tnoremap <silent> <buffer> <esc> <c-c>
+  aug END
+end
 "=======LIGHTLINE SETTINGS==========
 let g:lightline = {
             \ 'colorscheme': 'material_vim',

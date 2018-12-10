@@ -47,4 +47,4 @@ ctrl+b moves backwards half screen at a time
 
 di) (or }," etc) deletes all in between parents
 ci) (or }," etc) deletes all in between parents and switch to insert mode
-
+ct_ delete stuff until next _ and put insert mode

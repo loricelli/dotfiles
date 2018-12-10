@@ -47,6 +47,7 @@ nnoremap <leader>ia gg=G
 "open 10 line terminal below
 :nnoremap <leader>o :below 10sp term://$SHELL<cr>i
 
+nnoremap Q <Nop>
 "==========MAP=====================
 
 map SD :cd %:p:h<CR>

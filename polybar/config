@@ -1,0 +1,223 @@
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   Modified By loricelli.
+;
+;==========================================================
+
+[colors]
+background = #181818 
+foreground = #dfdfdf
+icons-foreground = #dfdfdf
+yellow = #ffa31a
+red = #FF5050
+
+[bar/my_bar]
+
+width = 100%
+height = 27
+fixed-center = true 
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 2
+padding-right = 2
+padding-left = 2
+module-margin-right = 2
+module-margin-left = 2
+
+font-0 = fixed:pixelsize=10;1
+font-1 = Font Awesome 5 Free:pixelsize=10;1
+font-2 = Font Awesome 5 Free Solid:pixelsize=10;1
+font-3 = Font Awesome 5 Brands:pixelsize=10;1
+modules-left = powermenu i3
+modules-center = title sp spp sn
+modules-right = volume temperature cpu memory wlan battery date
+
+[module/i3]
+type = internal/xworkspaces
+format = <label-state> 
+index-sort = true
+padding = 2
+pin-workspaces = false
+enable-click = true
+enable-scroll = true
+format-padding = 0
+
+icon-0 = 1:main;
+icon-1 = 2:terminal;
+icon-2 = 3:code;
+icon-3 = 4:browser;
+icon-4 = 5:misc;
+
+label-mode-padding = 2
+label-mode-foreground = #000
+label-mode-background = ${colors.background}
+
+label-active = %icon% 
+label-occupied = %icon% 
+label-urgent = %icon% 
+label-empty = %icon%
+label-occupied-padding = 2
+label-empty-padding = 2
+label-urgent-padding = 2
+label-active-padding = 2
+label-active-foreground = ${colors.yellow}
+
+[module/powermenu]
+type = custom/menu
+expand-right = true
+format-spacing = 1
+label-open = 
+label-open-foreground = ${colors.foreground}
+label-close =  cancel
+label-close-foreground = ${colors.red}
+label-separator = |
+label-separator-foreground = ${colors.foreground}
+menu-0-0 = reboot
+menu-0-0-exec = menu-open-1
+menu-0-1 = shutdown
+menu-0-1-exec = menu-open-2
+menu-1-0 = cancel
+menu-1-0-exec = menu-open-0
+menu-1-1 = reboot
+menu-1-1-exec = systemctl reboot
+menu-2-0 = shutdown
+menu-2-0-exec = systemctl poweroff
+menu-2-1 = cancel
+menu-2-1-exec = menu-open-0
+
+[module/battery]
+type = internal/battery
+full-at = 98
+time-format = %H:%M
+battery = BAT0
+adapter = AC
+format-charging = <animation-charging> <label-charging>
+;label-charging = %percentage%% (%time%)
+label-charging = %percentage%%
+format-discharging = <ramp-capacity> <label-discharging>
+;label-discharging = %percentage%% (%time%)
+label-discharging = %percentage%%
+format-full = <label-full>
+format-full-prefix = " "
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+ramp-capacity-0-foreground = ${colors.red}
+ramp-capacity-1-foreground = ${colors.red}
+ramp-capacity-foreground   = ${colors.foreground}
+bar-capacity-width = 10
+;animation not working
+animation-charging-0 = " "
+animation-charging-1 = " "
+animation-charging-2 = " "
+animation-charging-3 = " "
+animation-charging-4 = " "
+animation-charging-framerate = 750
+
+[module/wlan]
+type = internal/network
+interface = wlp13s0b1
+interval = 3.0
+
+label-disconnected = 
+label-connected =  %essid%
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+label = %percentage%%
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground}
+
+[module/memory]
+type = internal/memory
+interval = 2
+label = %percentage_used%%
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground}
+
+[module/temperature]
+type = internal/temperature
+interval = 0.5
+thermal-zone = 0
+label =  %temperature-c%
+
+[module/date]
+type = internal/date
+;label =  %date%  [ %time% ]
+label =  %time%
+date = %Y-%m-%d
+time = %H:%M
+time-alt = %H:%M [%Y-%m-%d]
+interval = 5
+
+
+[module/volume]
+type = internal/alsa
+;speaker-mixer = Speaker
+;headphone-mixer = Headphone
+;headphone-id = 16
+;mapped = true
+format-volume = <ramp-volume> <label-volume>
+label-volume = %percentage%%
+format-muted-prefix = ""
+label-muted = MUTE
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-volume-3 = 
+ramp-volume-4 = 
+ramp-volume-5 = 
+ramp-volume-6 = 
+ramp-volume-7 = 
+ramp-volume-8 = 
+ramp-volume-9 = 
+ramp-headphones-0 = 
+ramp-headphones-1 = 
+
+
+[module/title]
+type = custom/script
+;format-online =  <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
+exec = if [[ "$(playerctl status)" = "Playing" ]]; then playerctl metadata xesam:artist; echo -n " - "; playerctl metadata xesam:title;  fi
+exec-if = [[ "$(playerctl status)" = "Playing" || "$(playerctl status)" = "Paused" ]] && echo "0"
+interval = 1
+format = <label>
+
+[module/sn]
+type = custom/text
+content = "  "
+tail = true
+format = <label>
+content-background = ${colors.background}
+click-left = playerctl next
+
+
+[module/sp]
+type = custom/text
+content = "  "
+content-background = ${colors.background}
+click-left = playerctl previous
+
+[module/spp]
+type = custom/text
+interval = 0
+content = ""
+format = <label>
+format-background = ${colors.background}
+click-left = playerctl play-pause
+
+; vim:ft=dosini

@@ -1,8 +1,8 @@
 export TERM=xterm-256color
 # Path to your oh-my-zsh installation.
-  export ZSH="/home/lorenzo/.oh-my-zsh"
+export ZSH="$(echo $HOME)/.oh-my-zsh"
 
-ZSH_THEME="agnoster"
+ZSH_THEME="robbyrussell"
 
 plugins=(
   git
@@ -14,6 +14,7 @@ source $ZSH/oh-my-zsh.sh
 #===================ALIASES SECTION========================
 alias vi="nvim" #I'm lazy so 2 char is better than 4
 prompt_context() {}
+
 
 #===================GIT ALIASES============================
 alias gst="git status"

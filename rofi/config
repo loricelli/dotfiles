@@ -1,0 +1,6 @@
+rofi.combi-modi:        window,drun
+rofi.theme:             android_notification
+rofi.font:              hack 12
+rofi.modi:              combi
+rofi.width:             40
+

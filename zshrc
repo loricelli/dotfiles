@@ -24,3 +24,4 @@ alias gnope="git checkout ."
 alias gundo="git reset --soft HEAD^"
 alias gl="git log"
 alias gps="git push"
+cpcd() { cp "$1" "$2" && cd "$2"; }

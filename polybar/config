@@ -40,7 +40,7 @@ font-1 = Font Awesome 5 Free:pixelsize=10;1
 font-2 = Font Awesome 5 Free Solid:pixelsize=10;1
 font-3 = Font Awesome 5 Brands:pixelsize=10;1
 modules-left = powermenu i3
-modules-center = title sp spp sn
+modules-center = title prev-script play-script next-script
 modules-right = volume temperature cpu memory wlan battery date
 
 [module/i3]
@@ -197,27 +197,29 @@ exec-if = [[ "$(playerctl status)" = "Playing" || "$(playerctl status)" = "Pause
 interval = 1
 format = <label>
 
-[module/sn]
-type = custom/text
-content = "  "
-tail = true
+[module/next-script]
+type = custom/script
+exec = echo "placeholder"
+exec-if = [[ "$(playerctl status)" = "Playing" || "$(playerctl status)" = "Paused" ]] && echo "0"
+label = "  "
 format = <label>
-content-background = ${colors.background}
+click-left = playerctl next
+
+[module/prev-script]
+type = custom/script
+exec = echo "placeholder"
+exec-if = [[ "$(playerctl status)" = "Playing" || "$(playerctl status)" = "Paused" ]] && echo "0"
+label = "  "
+format = <label>
 click-left = playerctl next
 
 
-[module/sp]
-type = custom/text
-content = "  "
-content-background = ${colors.background}
-click-left = playerctl previous
-
-[module/spp]
-type = custom/text
-interval = 0
-content = ""
-format = <label>
-format-background = ${colors.background}
+[module/play-script]
+type = custom/script
+exec = echo "placeholder"
+exec-if = [[ "$(playerctl status)" = "Playing" || "$(playerctl status)" = "Paused" ]] && echo "0"
+label = ""
 click-left = playerctl play-pause
+format = <label>
 
 ; vim:ft=dosini

@@ -24,7 +24,7 @@ red = #FF5050
 
 width = 100%
 height = 27
-fixed-center = true 
+fixed-center = false
 
 background = ${colors.background}
 foreground = ${colors.foreground}

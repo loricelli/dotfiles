@@ -107,6 +107,7 @@ call plug#begin('~/.vim/plugged')
 "Plug 'KeitaNakamura/neodark.vim'
 Plug 'kaicataldo/material.vim'
 Plug 'ajmwagar/vim-deus'
+Plug 'morhetz/gruvbox'
 "======OTHER PLUGINS=================
 Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/vim-gitbranch'
@@ -124,10 +125,14 @@ Plug 'junegunn/fzf.vim'
 call plug#end()
 
 "=======APPEARENCE SECTIONS=========
-set background=dark
-colorscheme material
-highlight Comment cterm=italic
 set termguicolors "enables colors
+let g:gruvbox_sign_column='dark0_hard'
+let g:gruvbox_contrast_dark='hard'
+let g:gruvbox_italic=1
+let g:gruvbox_invert_selection=0
+set background=dark
+
+colorscheme gruvbox
 
 "=======PLUGIN SETTINGS=============
 
@@ -155,7 +160,7 @@ let NERDTreeMinimalUI = 1
 
 "=======LIGHTLINE SETTINGS==========
 let g:lightline = {
-            \ 'colorscheme': 'material_vim',
+            \ 'colorscheme': 'gruvbox',
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ],
             \             [ 'gitbranch','readonly', 'absolutepath', 'modified']],

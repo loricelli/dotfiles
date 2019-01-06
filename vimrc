@@ -44,18 +44,12 @@ nnoremap <leader>ib =i{
 "intend all file
 nnoremap <leader>ia gg=G 
 "open 10 line terminal below
-:nnoremap <leader>o :below 10sp term://$SHELL<cr>i
+nnoremap <leader>o :below 10sp term://$SHELL<cr>i
 
-nnoremap Q <Nop>
 "==========MAP=====================
 
+nnoremap Q <Nop>
 map SD :cd %:p:h<CR>
-"opens nerdtree
-map <C-f> :NERDTreeToggle<CR>
-
-"removes ? help on nerdtree
-let NERDTreeMinimalUI = 1
-
 "sw stands for surround word and sl stands for surround line. Short commands for surround plugin.
 "Type what you want after to sorround word/line
 map sw ysiw
@@ -66,10 +60,10 @@ map <C-c> "+y
 map <C-v> "+p
 
 "remap save on ctrl+s
-:nmap <C-s> :w<CR>
-:imap <C-s> <Esc>:w<CR>
-:nmap <C-q> :q<CR>
-:imap <C-q> <Esc>:q<CR>
+nmap <C-s> :w<CR>
+imap <C-s> <Esc>:w<CR>
+nmap <C-q> :q<CR>
+imap <C-q> <Esc>:q<CR>
 
 "trying to learn those fucking hjkl
 noremap <Up> <Nop>
@@ -92,9 +86,6 @@ nnoremap <C-H> <C-W><C-H>
 
 "Paste on line below the cursor
 map ,p :pu<CR>
-
-nnoremap <C-p> :Files<CR>
-nnoremap <C-a> :Ag<CR>
 
 "=======CUSTOM COMMANDS=======
 "replaces all the occurences of src with dest (only exact match)
@@ -140,6 +131,9 @@ set termguicolors "enables colors
 
 "=======PLUGIN SETTINGS=============
 
+"FZF settings
+nnoremap <C-p> :Files<CR>
+nnoremap <C-a> :Ag<CR>
 let g:fzf_layout = { 'down': '~30%' }
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler
@@ -151,6 +145,14 @@ if has('nvim')
     au TermOpen term://*FZF tnoremap <silent> <buffer> <esc> <c-c>
   aug END
 end
+
+"NERDTree settings
+
+"opens nerdtree
+map <C-f> :NERDTreeToggle<CR>
+"removes ? help on nerdtree
+let NERDTreeMinimalUI = 1
+
 "=======LIGHTLINE SETTINGS==========
 let g:lightline = {
             \ 'colorscheme': 'material_vim',

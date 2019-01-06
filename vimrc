@@ -5,7 +5,6 @@ autocmd VimResized * wincmd =
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 "==============SET=====================
-set termguicolors "enables colors
 set softtabstop=4
 " show existing tab with 4 spaces width
 set tabstop=4
@@ -95,7 +94,7 @@ nnoremap <C-H> <C-W><C-H>
 map ,p :pu<CR>
 
 nnoremap <C-p> :Files<CR>
-nnoremap <C-a> :Ag!<CR>
+nnoremap <C-a> :Ag<CR>
 
 "=======CUSTOM COMMANDS=======
 "replaces all the occurences of src with dest (only exact match)
@@ -116,6 +115,7 @@ call plug#begin('~/.vim/plugged')
 "======THEMES========================
 "Plug 'KeitaNakamura/neodark.vim'
 Plug 'kaicataldo/material.vim'
+Plug 'ajmwagar/vim-deus'
 "======OTHER PLUGINS=================
 Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/vim-gitbranch'
@@ -133,13 +133,14 @@ Plug 'junegunn/fzf.vim'
 call plug#end()
 
 "=======APPEARENCE SECTIONS=========
-
+set background=dark
 colorscheme material
 highlight Comment cterm=italic
+set termguicolors "enables colors
 
 "=======PLUGIN SETTINGS=============
 
-let g:fzf_layout = { 'down': '~25%' }
+let g:fzf_layout = { 'down': '~30%' }
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler

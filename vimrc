@@ -30,7 +30,7 @@ set encoding=UTF-8
 set cursorline 
 "==========LEADER=========================
 
-:let mapleader = "-"
+let mapleader = "ò"
 
 "leader key is ,
 nnoremap <leader><space> :nohlsearch<CR>
@@ -87,6 +87,9 @@ nnoremap <C-H> <C-W><C-H>
 "Paste on line below the cursor
 map ,p :pu<CR>
 
+"zi (zoom-in) and zo (zoom-out)
+nnoremap zi <C-w><Bar><C-w>_<cr>
+nnoremap zo <C-w>=
 "=======CUSTOM COMMANDS=======
 "replaces all the occurences of src with dest (only exact match)
 function! FindAndReplaceExact(src,dest)
@@ -106,7 +109,6 @@ call plug#begin('~/.vim/plugged')
 "======THEMES========================
 "Plug 'KeitaNakamura/neodark.vim'
 Plug 'kaicataldo/material.vim'
-Plug 'ajmwagar/vim-deus'
 Plug 'morhetz/gruvbox'
 "======OTHER PLUGINS=================
 Plug 'airblade/vim-gitgutter'
@@ -117,11 +119,16 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'amcsi/auto-pairs'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdcommenter'
-Plug 'dhruvasagar/vim-zoom'
 Plug 'ryanoasis/vim-devicons'
 Plug 'ervandew/supertab'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
+Plug 'sheerun/vim-polyglot'
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'Shougo/echodoc'
+  Plug 'Shougo/deoplete-clangx'
+endif
 call plug#end()
 
 "=======APPEARENCE SECTIONS=========
@@ -135,14 +142,19 @@ set background=dark
 colorscheme gruvbox
 
 "=======PLUGIN SETTINGS=============
+call deoplete#custom#var('clangx', 'clang_binary', '/usr/bin/clang')
+let g:deoplete#enable_at_startup=1
+set completeopt-=preview
+let g:echodoc#enable_at_startup=1
 
 "FZF settings
 nnoremap <C-p> :Files<CR>
 nnoremap <C-a> :Ag<CR>
 let g:fzf_layout = { 'down': '~30%' }
+nmap <silent> <leader>h :History<CR>
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler
-  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+  \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
 
 if has('nvim')
   aug fzf_setup

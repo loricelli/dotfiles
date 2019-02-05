@@ -60,10 +60,10 @@ map <C-c> "+y
 map <C-v> "+p
 
 "remap save on ctrl+s
-nmap <C-s> :w<CR>
-imap <C-s> <Esc>:w<CR>
-nmap <C-q> :q<CR>
-imap <C-q> <Esc>:q<CR>
+nnoremap <C-s> :w<CR>
+inoremap <C-s> <Esc>:w<CR>
+nnoremap <C-q> :q<CR>
+inoremap <C-q> <Esc>:q<CR>
 
 "trying to learn those fucking hjkl
 noremap <Up> <Nop>
@@ -151,7 +151,7 @@ let g:echodoc#enable_at_startup=1
 nnoremap <C-p> :Files<CR>
 nnoremap <C-a> :Ag<CR>
 let g:fzf_layout = { 'down': '~30%' }
-nmap <silent> <leader>h :History<CR>
+nnoremap <silent> <leader>h :History<CR>
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler

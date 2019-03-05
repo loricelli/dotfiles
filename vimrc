@@ -28,6 +28,7 @@ set noshowmode
 set ttimeoutlen=100
 set encoding=UTF-8
 set cursorline 
+set relativenumber
 "==========LEADER=========================
 
 let mapleader = "ò"
@@ -124,11 +125,6 @@ Plug 'ervandew/supertab'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'sheerun/vim-polyglot'
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'Shougo/echodoc'
-  Plug 'Shougo/deoplete-clangx'
-endif
 call plug#end()
 
 "=======APPEARENCE SECTIONS=========
@@ -142,11 +138,6 @@ set background=dark
 colorscheme gruvbox
 
 "=======PLUGIN SETTINGS=============
-call deoplete#custom#var('clangx', 'clang_binary', '/usr/bin/clang')
-let g:deoplete#enable_at_startup=1
-set completeopt-=preview
-let g:echodoc#enable_at_startup=1
-
 "FZF settings
 nnoremap <C-p> :Files<CR>
 nnoremap <C-a> :Ag<CR>
@@ -177,7 +168,7 @@ let g:lightline = {
             \   'left': [ [ 'mode', 'paste' ],
             \             [ 'gitbranch','readonly', 'absolutepath', 'modified']],
             \   'right': [ [ 'lineinfo'] ,
-            \            [ 'filetype','currenttime']
+            \            [ 'filetype']
             \            ]
             \ },
             \ 'component_function': {

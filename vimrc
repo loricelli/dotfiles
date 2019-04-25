@@ -1,6 +1,9 @@
 syntax enable "this enables sintax processing
 filetype plugin indent on
+
+"windows auto resize as equal size
 autocmd VimResized * wincmd =
+
 "o on line with comment won't generate a commented line
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
@@ -29,6 +32,11 @@ set ttimeoutlen=100
 set encoding=UTF-8
 set cursorline 
 set relativenumber
+set nopaste
+"allows preview on <leader>s
+set inccommand=nosplit
+"removes numbers from terminal
+autocmd TermOpen * setlocal nonumber norelativenumber
 "==========LEADER=========================
 
 let mapleader = "ò"
@@ -45,20 +53,26 @@ nnoremap <leader>ib =i{
 "intend all file
 nnoremap <leader>ia gg=G 
 "open 10 line terminal below
-nnoremap <leader>o :below 10sp term://$SHELL<cr>i
+nnoremap <leader>o :vertical sp term://$SHELL<cr>i
 
+"silver surfer on word under cursor
+nnoremap <leader>a :Ag <C-r>=expand('<cword>')<CR><CR>
+
+"replace word under cursor with word to insert
+nnoremap <Leader>s :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
 "==========MAP=====================
 
+"Disable ex mode 
 nnoremap Q <Nop>
-map SD :cd %:p:h<CR>
+
+nnoremap SD :cd %:p:h<CR>
 "sw stands for surround word and sl stands for surround line. Short commands for surround plugin.
 "Type what you want after to sorround word/line
 map sw ysiw
 map sl yss
 
 "copy/paste to system clipboard
-map <C-c> "+y
-map <C-v> "+p
+nnoremap <C-v> "+p
 
 "remap save on ctrl+s
 nnoremap <C-s> :w<CR>
@@ -72,9 +86,6 @@ noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
 
-"Disable ex mode 
-"noremap Q <Nop>
-":command Q q
 "allow esc on terminal window
 tnoremap <Esc> <C-\><C-n>
 tnoremap <C-q> <C-\><C-n>:q<CR>
@@ -86,7 +97,7 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 "Paste on line below the cursor
-map ,p :pu<CR>
+nnoremap ,p :pu<CR>
 
 "zi (zoom-in) and zo (zoom-out)
 nnoremap zi <C-w><Bar><C-w>_<cr>
@@ -143,7 +154,7 @@ nnoremap <C-p> :Files<CR>
 nnoremap <C-a> :Ag<CR>
 let g:fzf_layout = { 'down': '~30%' }
 nnoremap <silent> <leader>h :History<CR>
-autocmd! FileType fzf
+autocmd! FileType fzf 
 autocmd  FileType fzf set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
 
@@ -157,7 +168,7 @@ end
 "NERDTree settings
 
 "opens nerdtree
-map <C-f> :NERDTreeToggle<CR>
+map <C-f> :NERDTreeFind<CR>
 "removes ? help on nerdtree
 let NERDTreeMinimalUI = 1
 
@@ -196,7 +207,7 @@ function! DisplayCurrentTime()
     return strftime("%d/%m/%y %H:%M")
 endfunction
 let g:lightline.subseparator = {
-            \   'left': '', 'right': '' 
+           \   'left': '', 'right': '' 
             \}
 let g:lightline.separator = {
             \   'left': '', 'right': ''

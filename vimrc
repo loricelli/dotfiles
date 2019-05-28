@@ -35,6 +35,8 @@ set relativenumber
 set nopaste
 "allows preview on <leader>s
 set inccommand=nosplit
+"show tab bar even with one tab
+set showtabline=2
 "removes numbers from terminal
 autocmd TermOpen * setlocal nonumber norelativenumber
 "==========LEADER=========================
@@ -85,6 +87,10 @@ noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
+
+"move between tabs
+nnoremap <C-Right> :tabn<CR>
+nnoremap <C-Left> :tabp<CR>
 
 "allow esc on terminal window
 tnoremap <Esc> <C-\><C-n>
@@ -156,13 +162,13 @@ let g:fzf_layout = { 'down': '~30%' }
 nnoremap <silent> <leader>h :History<CR>
 autocmd! FileType fzf 
 autocmd  FileType fzf set laststatus=0 noshowmode noruler
-  \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
+            \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
 
 if has('nvim')
-  aug fzf_setup
-    au!
-    au TermOpen term://*FZF tnoremap <silent> <buffer> <esc> <c-c>
-  aug END
+    aug fzf_setup
+        au!
+        au TermOpen term://*FZF tnoremap <silent> <buffer> <esc> <c-c>
+    aug END
 end
 
 "NERDTree settings
@@ -178,7 +184,7 @@ let g:lightline = {
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ],
             \             [ 'gitbranch','readonly', 'absolutepath', 'modified']],
-            \   'right': [ [ 'lineinfo'] ,
+            \   'right': [ [ 'lineinfo','percent'] ,
             \            [ 'filetype']
             \            ]
             \ },
@@ -206,12 +212,11 @@ endfunction
 function! DisplayCurrentTime()
     return strftime("%d/%m/%y %H:%M")
 endfunction
-let g:lightline.subseparator = {
-           \   'left': '', 'right': '' 
-            \}
-let g:lightline.separator = {
-            \   'left': '', 'right': ''
-            \}
+"let g:lightline.subseparator = {
+"           \   'left': '', 'right': '' 
+"            \}
+let g:lightline.subseparator = { 'left': '', 'right': '' }
+let g:lightline.separator = { 'left': '', 'right': '' }
 function! LightlineFugitive()
     if exists('*gitbranch#name')
         let branch = gitbranch#name()

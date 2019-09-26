@@ -61,7 +61,7 @@ nnoremap <leader>o :vertical sp term://$SHELL<cr>i
 nnoremap <leader>a :Ag <C-r>=expand('<cword>')<CR><CR>
 
 "replace word under cursor with word to insert
-nnoremap <Leader>s :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
+nnoremap <Leader>r :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
 "==========MAP=====================
 
 "Disable ex mode 
@@ -142,6 +142,7 @@ Plug 'ervandew/supertab'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'sheerun/vim-polyglot'
+Plug 'Yggdroot/indentLine'
 call plug#end()
 
 "=======APPEARENCE SECTIONS=========
@@ -158,6 +159,7 @@ colorscheme gruvbox
 "FZF settings
 nnoremap <C-p> :Files<CR>
 nnoremap <C-a> :Ag<CR>
+nnoremap <leader>b :Buffers<CR>
 let g:fzf_layout = { 'down': '~30%' }
 nnoremap <silent> <leader>h :History<CR>
 autocmd! FileType fzf 
@@ -224,4 +226,3 @@ function! LightlineFugitive()
     endif
     return ''
 endfunction
-

@@ -43,8 +43,10 @@ autocmd TermOpen * setlocal nonumber norelativenumber
 
 let mapleader = "ò"
 
-"leader key is ,
 nnoremap <leader><space> :nohlsearch<CR>
+
+"open 10 line terminal below
+nnoremap <leader>o :vertical sp term://$SHELL<cr>i
 
 "adds space above
 nnoremap <leader>su O<Esc>j
@@ -54,14 +56,21 @@ nnoremap <leader>ib =i{
 
 "intend all file
 nnoremap <leader>ia gg=G 
-"open 10 line terminal below
-nnoremap <leader>o :vertical sp term://$SHELL<cr>i
-
-"silver surfer on word under cursor
-nnoremap <leader>a :Ag <C-r>=expand('<cword>')<CR><CR>
 
 "replace word under cursor with word to insert
 nnoremap <Leader>r :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 "==========MAP=====================
 
 "Disable ex mode 
@@ -108,6 +117,7 @@ nnoremap ,p :pu<CR>
 "zi (zoom-in) and zo (zoom-out)
 nnoremap zi <C-w><Bar><C-w>_<cr>
 nnoremap zo <C-w>=
+
 "=======CUSTOM COMMANDS=======
 "replaces all the occurences of src with dest (only exact match)
 function! FindAndReplaceExact(src,dest)
@@ -138,30 +148,36 @@ Plug 'amcsi/auto-pairs'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdcommenter'
 Plug 'ryanoasis/vim-devicons'
-Plug 'ervandew/supertab'
+"Plug 'ervandew/supertab'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'Yggdroot/indentLine'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'ayu-theme/ayu-vim' " or other package manager
 call plug#end()
 
 "=======APPEARENCE SECTIONS=========
 set termguicolors "enables colors
-let g:gruvbox_sign_column='dark0_hard'
-let g:gruvbox_contrast_dark='hard'
-let g:gruvbox_italic=1
-let g:gruvbox_invert_selection=0
-set background=dark
+"let g:gruvbox_sign_column='dark0_hard'
+"let g:gruvbox_contrast_dark='hard'
+"let g:gruvbox_italic=1
+"let g:gruvbox_invert_selection=0
+"set background=dark
 
-colorscheme gruvbox
+"colorscheme gruvbox
+
+let g:ayucolor="dark"   " for dark version of theme
+colorscheme ayu
 
 "=======PLUGIN SETTINGS=============
 "FZF settings
 nnoremap <C-p> :Files<CR>
-nnoremap <C-a> :Ag<CR>
+nnoremap <C-a> :Rg<CR>
 nnoremap <leader>b :Buffers<CR>
 let g:fzf_layout = { 'down': '~30%' }
 nnoremap <silent> <leader>h :History<CR>
+
 autocmd! FileType fzf 
 autocmd  FileType fzf set laststatus=0 noshowmode noruler
             \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
@@ -182,11 +198,11 @@ let NERDTreeMinimalUI = 1
 
 "=======LIGHTLINE SETTINGS==========
 let g:lightline = {
-            \ 'colorscheme': 'gruvbox',
+            \ 'colorscheme': 'ayu',
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ],
-            \             [ 'gitbranch','readonly', 'absolutepath', 'modified']],
-            \   'right': [ [ 'lineinfo','percent'] ,
+            \             [ 'gitbranch','readonly', 'absolutepath', 'modified','currentfunction']],
+            \   'right': [ [ 'lineinfo','percent','cocstatus'] ,
             \            [ 'filetype']
             \            ]
             \ },
